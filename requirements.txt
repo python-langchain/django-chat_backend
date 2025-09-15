@@ -1,0 +1,11 @@
+Django
+djangorestframework
+psycopg2-binary
+PyJWT
+channels
+channels-redis
+redis
+python-dotenv
+djangorestframework-simplejwt
+# Optional but handy
+django-cors-headers
