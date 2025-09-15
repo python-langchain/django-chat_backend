@@ -38,9 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
+
+    'rest_framework',
+    'corsheaders',
+    'channels',
+    'rest_framework_simplejwt.token_blacklist',
+    
+    'users'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,7 +76,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chat_backend.wsgi.application'
-
+ASGI_APPLICATION = 'chat_backend.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -76,13 +84,15 @@ WSGI_APPLICATION = 'chat_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'chatdb'),
-        'USER': os.environ.get('POSTGRES_USER', 'chatuser'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'chatpass'),
-        'HOST': os.environ.get('POSTGRES_HOST', 'db'),
+        'NAME': os.environ.get('POSTGRES_DB', 'chat_db'),
+        'USER': os.environ.get('POSTGRES_USER', 'chat_backend'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'supersecret_backend_chat_yo123'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
     }
 }
+
+AUTH_USER_MODEL = 'users.User'
 
 REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/1')
 CHANNEL_LAYERS = {
